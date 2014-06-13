@@ -1,0 +1,12 @@
+@(formMeta: Form[Meta])
+@import helper._
+
+@main("Cria meta"){
+  @helper.form(routes.Application.cadastraMeta) {
+    @inputText(formMeta("descricao"), '_label -> "Nome da meta:  ")
+    <p></p>
+    @inputText(formMeta("nsemana"), 'placeholder -> "(Inteiro: 1-6)", '_label -> "Numero da semana:  ")
+    
+    <input type="submit" value="Criar">
+  }
+ }

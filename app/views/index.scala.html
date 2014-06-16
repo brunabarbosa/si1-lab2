@@ -1,32 +1,13 @@
-@(metas: List[Meta])
+@(hello: String)
  
-@main("Lista de metas"){
-  @if(metas.isEmpty){
-    <h3>Nao ha metas cadastradas</h3>
-  } else {
-    <h3>Metas Cadastrados:</h3>
-    <table>
-      <tr>
-        <th>descricao</th>
-        <th>Prazo(Em numero de semanas)</th>
-      </tr>
-    @for(meta <- metas){
-      <tr>
-        <td>@meta.getdescricao</td>
-        <td>@meta.getsemana</td>
-        <td>
-		<form action="@routes.Application.deleteMeta(meta.getId())"
-			method="post">
-			<input type="submit" class="btn btn-danger" value="Delete">
-		</form>
-	</td>
-      </tr>
-      
-    }
-	 </table>
-	 	
+@main("Index"){
 
-	}
+	<a href="@routes.Application.tabela("1")">1 Semana</a><br>
+	<a href="@routes.Application.tabela("2")">2 Semana</a><br>
+	<a href="@routes.Application.tabela("3")">3 Semana</a><br>
+	<a href="@routes.Application.tabela("4")">4 Semana</a><br>
+	<a href="@routes.Application.tabela("5")">5 Semana</a><br>
+	<a href="@routes.Application.tabela("6")">6 Semana</a><br>
 	  <hr>
   <a href="@routes.Application.formularioNovaMeta">Nova meta</a>
 }

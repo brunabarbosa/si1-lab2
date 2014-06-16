@@ -1,12 +1,8 @@
 package controllers;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import models.Meta;
-import models.MetaComparator;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 import play.data.Form;
@@ -15,6 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.formularioNovaMeta;
 import views.html.index;
+import views.html.tabela;
 
 public class Application extends Controller {
 	static Form<Meta> metaForm = Form.form(Meta.class);
@@ -22,11 +19,14 @@ public class Application extends Controller {
 	
 	@Transactional 
     public static Result index() {
-    	List<Meta> result = getDao().findAllByClassName("Meta");
-    	Collections.sort(result, new MetaComparator());
-    
-    	return ok(index.render(result));
+    	return ok(index.render("Index page"));
     }
+	
+	@Transactional 
+	public static Result tabela(String nsemana){
+		List<Meta> result = getDao().findByAttributeName("Meta", "nsemana", nsemana);
+		return ok(tabela.render(result, result.size()));
+	}
     
     public static Result formularioNovaMeta(){
     	Form<Meta> form = Form.form(Meta.class);
@@ -40,6 +40,9 @@ public class Application extends Controller {
     	if(form.hasErrors()){
     		return badRequest(formularioNovaMeta.render(form));
 		}
+    	if(form.data().size() == 0){
+    		inicializaDezMetas();
+    	}
 		// Persiste o Livro criado
 		getDao().persist(form.get());
 		// Espelha no Banco de Dados
@@ -48,6 +51,12 @@ public class Application extends Controller {
 		return redirect(routes.Application.index());
     }
     
+	public static Result inicializaDezMetas() {
+		// TODO Auto-generated method stub
+		return ok();
+		
+	}
+
 	@Transactional
 	public static Result deleteMeta(Long id) {
 		// Remove o Livro pelo Id

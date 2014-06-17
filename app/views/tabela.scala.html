@@ -4,13 +4,14 @@
   @if(metas.isEmpty){
     <h3>Nao ha metas cadastradas</h3>
   } else {
-    <h3>Metas Cadastrados:</h3>
+    <h3>Metas Cadastrados ordenadas por prioridade:</h3>
     <table>
       <tr>
         <th>Nome</th>
         <th>Descricao</th>
         <th>Prazo(Em numero de semanas)</th>
         <th>Prioridade</th>
+        <th>Concluida</th>
       </tr>
      
     @for(meta <- metas){
@@ -20,6 +21,7 @@
         <td>@meta.getDescricao</td>
         <td>@meta.getsemana</td>
         <td>@meta.getPrioridade</td>
+        <td>@meta.isConcluida</td>
         
         
         

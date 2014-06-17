@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import models.Meta;
+import models.Prioridade;
 import models.PrioridadeComparator;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -21,8 +22,27 @@ public class Application extends Controller {
 	
 	@Transactional 
     public static Result index() {
+		List<Meta> result = getDao().findAllByClassName("Meta");
+    	inicializaDezMetas(result);
+		
     	return ok(index.render("Index page"));
     }
+
+	private static void inicializaDezMetas(List<Meta> result) {
+		if(result.size() == 0){
+    		dao.merge(new Meta("meta01", "desc", 1, Prioridade.Media, false));
+    		dao.merge(new Meta("meta02", "desc", 1, Prioridade.Alta, false));
+    		dao.merge(new Meta("meta03", "desc", 1, Prioridade.Alta, false));
+    		dao.merge(new Meta("meta04", "desc", 1, Prioridade.Baixa, false));
+    		dao.merge(new Meta("meta05", "desc", 2, Prioridade.Alta, false));
+    		dao.merge(new Meta("meta06", "desc", 2, Prioridade.Media, false));
+    		dao.merge(new Meta("meta07", "desc", 2, Prioridade.Alta, false));
+    		dao.merge(new Meta("meta08", "desc", 3, Prioridade.Baixa, false));
+    		dao.merge(new Meta("meta09", "desc", 3, Prioridade.Alta, false));
+    		dao.merge(new Meta("meta10", "desc", 3, Prioridade.Media, false));
+    		getDao().flush();
+    	}
+	}
 	
 	@Transactional 
 	public static Result tabela(String nsemana){
@@ -43,9 +63,6 @@ public class Application extends Controller {
     	if(form.hasErrors()){
     		return badRequest(formularioNovaMeta.render(form));
 		}
-    	if(form.data().size() == 0){
-    		inicializaDezMetas();
-    	}
 		// Persiste o Livro criado
 		getDao().persist(form.get());
 		// Espelha no Banco de Dados
@@ -53,12 +70,6 @@ public class Application extends Controller {
 
 		return redirect(routes.Application.index());
     }
-    
-	public static Result inicializaDezMetas() {
-		// TODO Auto-generated method stub
-		return ok();
-		
-	}
 
 	@Transactional
 	public static Result deleteMeta(Long id) {

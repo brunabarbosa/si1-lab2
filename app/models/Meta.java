@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "META")
 public class Meta {
-
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
@@ -26,9 +26,24 @@ public class Meta {
 
 	@Column(name = "prioridade")
 	private Prioridade prioridade;
-
+	
+	@Column(name = "concluida")
+	private boolean concluida;
+	
 	public String getNome() {
 		return nome;
+	}
+	
+	public Meta(String nome, String descricao, int nsemana, Prioridade prioridade, boolean concluida){
+		this.nome = nome;
+		this.descricao = descricao;
+		this.nsemana = nsemana;
+		this.prioridade = prioridade;
+		this.concluida = concluida;
+	}
+	
+	public Meta(){
+	
 	}
 
 	public void setNome(String nome) {
@@ -55,10 +70,6 @@ public class Meta {
 		this.prioridade = prioridade;
 	}
 
-	public int compareTo(Meta outraMeta) {
-		return this.getsemana() - outraMeta.getsemana();
-
-	}
 
 	public String getDescricao() {
 		return descricao;
@@ -66,6 +77,19 @@ public class Meta {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public boolean isConcluida() {
+		return concluida;
+	}
+
+	public void setConcluida(boolean concluida) {
+		this.concluida = concluida;
+	}
+
+	public int compareTo(Meta outraMeta) {
+		return this.getsemana() - outraMeta.getsemana();
+
 	}
 
 }

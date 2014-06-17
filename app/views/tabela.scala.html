@@ -7,15 +7,19 @@
     <h3>Metas Cadastrados:</h3>
     <table>
       <tr>
-        <th>descricao</th>
+        <th>Nome</th>
+        <th>Descricao</th>
         <th>Prazo(Em numero de semanas)</th>
+        <th>Prioridade</th>
       </tr>
      
     @for(meta <- metas){
     	
       <tr>
-        <td>@meta.getdescricao</td>
+        <td>@meta.getNome</td>
+        <td>@meta.getDescricao</td>
         <td>@meta.getsemana</td>
+        <td>@meta.getPrioridade</td>
         
         
         

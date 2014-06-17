@@ -12,13 +12,33 @@ html {
 }
 
 body {
-	margin: 0
+	margin: 0  
+}
+
+body, html {
+    height:100%;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary
 	{
 	display: block
 }
+
+#footer {  
+
+   height:30px;
+   width:100px;
+   margin:0px auto;
+   padding-bottom: 8px;
+}
+
+#footer-cont{
+	width:100%;
+    position:fixed;
+	left:0px;
+	bottom:0px;
+}
+
 
 header{
 	margin: 10px;
@@ -193,7 +213,7 @@ table {
 }
 
 td,th {
-	padding: 0
+	padding: 10px;
 }
 
 @media print {
@@ -288,6 +308,21 @@ input,button,select,textarea {
 	font-size: inherit;
 	line-height: inherit
 }
+
+section#main {
+    position: absolute;
+    padding: 5em 2em;
+    border-bottom: 1px solid #ccc;
+    min-height: 100px;
+    height:  auto;
+} 
+
+section#main .topRight {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+}
+
 
 a {
 	color: #428bca;
@@ -724,6 +759,7 @@ pre code {
 	margin-left: auto;
 	padding-left: 15px;
 	padding-right: 15px
+	
 }
 
 @media ( min-width :768px) {

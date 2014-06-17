@@ -3,10 +3,16 @@
 
 @main("Cria meta"){
   @helper.form(routes.Application.cadastraMeta) {
-    @inputText(formMeta("descricao"), '_label -> "Nome da meta:  ")
+    @inputText(formMeta("nome"), '_label -> "Nome da meta:  ")
+    <p></p>
+    @inputText(formMeta("descricao"), 'placeholder -> "Descricao da meta", '_label -> "Descricao:  ")
     <p></p>
     @inputText(formMeta("nsemana"), 'placeholder -> "(Inteiro: 1-6)", '_label -> "Numero da semana:  ")
-    
+    <p></p>
+    @helper.select( formMeta("prioridade"),
+	options(models.Prioridade.values().toSeq.map(_.toString)), '_label ->
+	"Prioridade" )
+	
     <input type="submit" value="Criar">
   }
  }

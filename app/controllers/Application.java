@@ -1,8 +1,10 @@
 package controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import models.Meta;
+import models.PrioridadeComparator;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 import play.data.Form;
@@ -25,6 +27,7 @@ public class Application extends Controller {
 	@Transactional 
 	public static Result tabela(String nsemana){
 		List<Meta> result = getDao().findByAttributeName("Meta", "nsemana", nsemana);
+		Collections.sort(result, new PrioridadeComparator());
 		return ok(tabela.render(result, result.size()));
 	}
     

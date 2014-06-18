@@ -17,22 +17,39 @@
     @for(meta <- metas){
     	
       <tr>
-        <td>@meta.getNome</td>
-        <td>@meta.getDescricao</td>
+		<td>@meta.getNome</td>
+		<td>@meta.getDescricao</td>
         <td>@meta.getsemana</td>
         <td>@meta.getPrioridade</td>
-        <td>@meta.isConcluida</td>
+        @if(meta.isConcluida) {
+			<td >
+				<div style="background-color: green; color: white">Done</div>
+			</td>
+		} else {
+			<td>
+				<div style="background-color: red; color: white">Undone</div>
+			</td>
+			<td>
+				<form action="@routes.Application.deleteMeta(meta.getId())"
+					method="post">
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</form>
+			</td>
+	
+			<td>
+				<form action="@routes.Application.mudaConclusao(meta.getId())"
+					method="post">
+					<input type="submit" class="btn btn-danger" value="Concluida">
+				</form>
+			</td> 
+		}
         
         
         
-        <td>
-		<form action="@routes.Application.deleteMeta(meta.getId())"
-			method="post">
-			<input type="submit" class="btn btn-danger" value="Delete">
-		</form>
+        
 		
 		
-	</td>
+		
       </tr>
       
       

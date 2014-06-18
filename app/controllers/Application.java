@@ -20,6 +20,7 @@ public class Application extends Controller {
 	static Form<Meta> metaForm = Form.form(Meta.class);
 	private static GenericDAO dao = new GenericDAOImpl();
 	
+	
 	@Transactional 
     public static Result index() {
 		List<Meta> result = getDao().findAllByClassName("Meta");
@@ -42,6 +43,15 @@ public class Application extends Controller {
     		dao.merge(new Meta("meta10", "desc", 3, Prioridade.Media, false));
     		getDao().flush();
     	}
+	}
+	
+	@Transactional
+	public static Result mudaConclusao(Long id){
+		Meta meta = getDao().findByEntityId(Meta.class, id);
+		meta.setConcluida(true);
+		dao.merge(meta);
+		getDao().flush();
+		return ok(index.render("Index page"));
 	}
 	
 	@Transactional 

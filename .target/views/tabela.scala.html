@@ -1,0 +1,63 @@
+@(metas: List[Meta])(numeroMetas: Int )
+ 
+@main("Lista de metas"){
+  @if(metas.isEmpty){
+    <h3>Nao ha metas cadastradas</h3>
+  } else {
+    <h3>Metas Cadastrados ordenadas por prioridade:</h3>
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Prazo(Em numero de semanas)</th>
+        <th>Prioridade</th>
+        <th>Concluida</th>
+      </tr>
+     
+    @for(meta <- metas){
+    	
+      <tr>
+		<td>@meta.getNome</td>
+		<td>@meta.getDescricao</td>
+        <td>@meta.getsemana</td>
+        <td>@meta.getPrioridade</td>
+        @if(meta.isConcluida) {
+			<td >
+				<div style="background-color: green; color: white">Done</div>
+			</td>
+		} else {
+			<td>
+				<div style="background-color: red; color: white">Undone</div>
+			</td>
+			<td>
+				<form action="@routes.Application.deleteMeta(meta.getId())"
+					method="post">
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</form>
+			</td>
+	
+			<td>
+				<form action="@routes.Application.mudaConclusao(meta.getId())"
+					method="post">
+					<input type="submit" class="btn btn-danger" value="Concluida">
+				</form>
+			</td> 
+		}
+        
+        
+        
+        
+		
+		
+		
+      </tr>
+      
+      
+    }
+	 </table>
+	 <h3>Numero de Metas para essa Semana:  @numeroMetas</h3>
+	 
+
+	}
+	  
+}

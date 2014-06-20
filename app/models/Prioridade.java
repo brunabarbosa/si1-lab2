@@ -13,4 +13,6 @@ public enum Prioridade {
 	public int getValor(){
 		return valor;
 	}
+	
+	
 }
